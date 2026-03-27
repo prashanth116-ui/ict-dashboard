@@ -876,15 +876,55 @@ canvas { display:block; }
   border-bottom: 1px solid var(--border);
 }
 
+/* ── BB-BTN HINT TEXT ── */
+.bb-hint {
+  font-size: 10px;
+  color: var(--text3);
+  display: block;
+  margin-top: 3px;
+}
+[data-theme="light"] .bb-hint {
+  color: #6b849e;
+}
+
+/* ── BB-BTN BASE STYLES (moved from inline) ── */
+.bb-btn {
+  flex: 1;
+  padding: 14px;
+  border: 2px solid var(--border);
+  border-radius: 6px;
+  background: var(--bg3);
+  color: var(--text2);
+  font-family: var(--mono);
+  font-size: 12px;
+  cursor: pointer;
+  transition: all 0.2s;
+  text-align: center;
+  line-height: 1.4;
+}
+.bb-btn:hover {
+  border-color: var(--gold);
+  color: var(--text);
+}
+
 /* ── BB-BTN LIGHT THEME ── */
 [data-theme="light"] .bb-btn {
-  background: var(--bg2) !important;
-  border-color: var(--border) !important;
-  color: var(--text2) !important;
+  background: #ffffff;
+  border-color: #d1dae6;
+  color: #0f1923;
 }
 [data-theme="light"] .bb-btn:hover {
-  border-color: var(--gold) !important;
-  color: var(--text) !important;
+  border-color: var(--gold);
+  color: #0f1923;
+  background: rgba(240,180,41,0.06);
+}
+[data-theme="light"] .bb-btn span,
+[data-theme="light"] .bb-btn .bb-hint {
+  color: #546a80;
+}
+/* Question card label in light mode */
+[data-theme="light"] .card-label {
+  opacity: 1;
 }
 
 /* ── TABLE LIGHT THEME ── */
@@ -3567,8 +3607,8 @@ canvas { display:block; }
         <div class="card-label">Question 1</div>
         <div style="font-size:15px;font-weight:700;margin-bottom:14px;">What is your HTF bias?</div>
         <div style="display:flex;gap:10px;">
-          <button class="bb-btn" onclick="bbSet('htf','bullish',this)" style="flex:1;padding:14px;border:2px solid var(--border);border-radius:6px;background:var(--bg3);color:var(--text2);font-family:var(--mono);font-size:12px;cursor:pointer;transition:all 0.2s;">▲ BULLISH<br><span style="font-size:10px;color:var(--text3);">Price below 50% of monthly range</span></button>
-          <button class="bb-btn" onclick="bbSet('htf','bearish',this)" style="flex:1;padding:14px;border:2px solid var(--border);border-radius:6px;background:var(--bg3);color:var(--text2);font-family:var(--mono);font-size:12px;cursor:pointer;transition:all 0.2s;">▼ BEARISH<br><span style="font-size:10px;color:var(--text3);">Price above 50% of monthly range</span></button>
+          <button class="bb-btn" onclick="bbSet('htf','bullish',this)" >▲ BULLISH<br><span class="bb-hint">Price below 50% of monthly range</span></button>
+          <button class="bb-btn" onclick="bbSet('htf','bearish',this)" >▼ BEARISH<br><span class="bb-hint">Price above 50% of monthly range</span></button>
         </div>
       </div>
       <!-- Q2 -->
@@ -3576,8 +3616,8 @@ canvas { display:block; }
         <div class="card-label">Question 2</div>
         <div style="font-size:15px;font-weight:700;margin-bottom:14px;">Where is the nearest draw on liquidity?</div>
         <div style="display:flex;gap:10px;">
-          <button class="bb-btn" onclick="bbSet('draw','above',this)" style="flex:1;padding:14px;border:2px solid var(--border);border-radius:6px;background:var(--bg3);color:var(--text2);font-family:var(--mono);font-size:12px;cursor:pointer;transition:all 0.2s;">ABOVE PRICE<br><span style="font-size:10px;color:var(--text3);">BSL — equal highs / prior highs</span></button>
-          <button class="bb-btn" onclick="bbSet('draw','below',this)" style="flex:1;padding:14px;border:2px solid var(--border);border-radius:6px;background:var(--bg3);color:var(--text2);font-family:var(--mono);font-size:12px;cursor:pointer;transition:all 0.2s;">BELOW PRICE<br><span style="font-size:10px;color:var(--text3);">SSL — equal lows / prior lows</span></button>
+          <button class="bb-btn" onclick="bbSet('draw','above',this)" >ABOVE PRICE<br><span class="bb-hint">BSL — equal highs / prior highs</span></button>
+          <button class="bb-btn" onclick="bbSet('draw','below',this)" >BELOW PRICE<br><span class="bb-hint">SSL — equal lows / prior lows</span></button>
         </div>
       </div>
       <!-- Q3 -->
@@ -3585,8 +3625,8 @@ canvas { display:block; }
         <div class="card-label">Question 3</div>
         <div style="font-size:15px;font-weight:700;margin-bottom:14px;">Is a Kill Zone currently active?</div>
         <div style="display:flex;gap:10px;">
-          <button class="bb-btn" onclick="bbSet('kz','yes',this)" style="flex:1;padding:14px;border:2px solid var(--border);border-radius:6px;background:var(--bg3);color:var(--text2);font-family:var(--mono);font-size:12px;cursor:pointer;transition:all 0.2s;">✅ YES<br><span style="font-size:10px;color:var(--text3);">London / NY AM / NY PM</span></button>
-          <button class="bb-btn" onclick="bbSet('kz','no',this)" style="flex:1;padding:14px;border:2px solid var(--border);border-radius:6px;background:var(--bg3);color:var(--text2);font-family:var(--mono);font-size:12px;cursor:pointer;transition:all 0.2s;">❌ NO<br><span style="font-size:10px;color:var(--text3);">Outside all kill zone windows</span></button>
+          <button class="bb-btn" onclick="bbSet('kz','yes',this)" >✅ YES<br><span class="bb-hint">London / NY AM / NY PM</span></button>
+          <button class="bb-btn" onclick="bbSet('kz','no',this)" >❌ NO<br><span class="bb-hint">Outside all kill zone windows</span></button>
         </div>
       </div>
     </div>
@@ -3596,8 +3636,8 @@ canvas { display:block; }
         <div class="card-label">Question 4</div>
         <div style="font-size:15px;font-weight:700;margin-bottom:14px;">Has a liquidity sweep occurred?</div>
         <div style="display:flex;gap:10px;">
-          <button class="bb-btn" onclick="bbSet('sweep','yes',this)" style="flex:1;padding:14px;border:2px solid var(--border);border-radius:6px;background:var(--bg3);color:var(--text2);font-family:var(--mono);font-size:12px;cursor:pointer;transition:all 0.2s;">✅ YES<br><span style="font-size:10px;color:var(--text3);">Stop hunt confirmed above/below</span></button>
-          <button class="bb-btn" onclick="bbSet('sweep','no',this)" style="flex:1;padding:14px;border:2px solid var(--border);border-radius:6px;background:var(--bg3);color:var(--text2);font-family:var(--mono);font-size:12px;cursor:pointer;transition:all 0.2s;">❌ NO<br><span style="font-size:10px;color:var(--text3);">No stop hunt yet</span></button>
+          <button class="bb-btn" onclick="bbSet('sweep','yes',this)" >✅ YES<br><span class="bb-hint">Stop hunt confirmed above/below</span></button>
+          <button class="bb-btn" onclick="bbSet('sweep','no',this)" >❌ NO<br><span class="bb-hint">No stop hunt yet</span></button>
         </div>
       </div>
       <!-- Q5 -->
@@ -3605,8 +3645,8 @@ canvas { display:block; }
         <div class="card-label">Question 5</div>
         <div style="font-size:15px;font-weight:700;margin-bottom:14px;">Has ChoCH / MSS confirmed?</div>
         <div style="display:flex;gap:10px;">
-          <button class="bb-btn" onclick="bbSet('choch','yes',this)" style="flex:1;padding:14px;border:2px solid var(--border);border-radius:6px;background:var(--bg3);color:var(--text2);font-family:var(--mono);font-size:12px;cursor:pointer;transition:all 0.2s;">✅ YES<br><span style="font-size:10px;color:var(--text3);">Structure shift on 5M or 15M</span></button>
-          <button class="bb-btn" onclick="bbSet('choch','no',this)" style="flex:1;padding:14px;border:2px solid var(--border);border-radius:6px;background:var(--bg3);color:var(--text2);font-family:var(--mono);font-size:12px;cursor:pointer;transition:all 0.2s;">❌ NO<br><span style="font-size:10px;color:var(--text3);">No structure shift yet</span></button>
+          <button class="bb-btn" onclick="bbSet('choch','yes',this)" >✅ YES<br><span class="bb-hint">Structure shift on 5M or 15M</span></button>
+          <button class="bb-btn" onclick="bbSet('choch','no',this)" >❌ NO<br><span class="bb-hint">No structure shift yet</span></button>
         </div>
       </div>
       <!-- Q6 -->
@@ -3614,8 +3654,8 @@ canvas { display:block; }
         <div class="card-label">Question 6</div>
         <div style="font-size:15px;font-weight:700;margin-bottom:14px;">Is price at a valid PD Array?</div>
         <div style="display:flex;gap:10px;">
-          <button class="bb-btn" onclick="bbSet('pda','yes',this)" style="flex:1;padding:14px;border:2px solid var(--border);border-radius:6px;background:var(--bg3);color:var(--text2);font-family:var(--mono);font-size:12px;cursor:pointer;transition:all 0.2s;">✅ YES<br><span style="font-size:10px;color:var(--text3);">OB / FVG / Breaker / OTE zone</span></button>
-          <button class="bb-btn" onclick="bbSet('pda','no',this)" style="flex:1;padding:14px;border:2px solid var(--border);border-radius:6px;background:var(--bg3);color:var(--text2);font-family:var(--mono);font-size:12px;cursor:pointer;transition:all 0.2s;">❌ NO<br><span style="font-size:10px;color:var(--text3);">No confluent array present</span></button>
+          <button class="bb-btn" onclick="bbSet('pda','yes',this)" >✅ YES<br><span class="bb-hint">OB / FVG / Breaker / OTE zone</span></button>
+          <button class="bb-btn" onclick="bbSet('pda','no',this)" >❌ NO<br><span class="bb-hint">No confluent array present</span></button>
         </div>
       </div>
     </div>
