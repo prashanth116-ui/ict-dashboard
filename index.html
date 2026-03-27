@@ -734,8 +734,7 @@ canvas { display:block; }
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 16px;
-  flex-wrap: wrap;
+  gap: 12px;
 }
 [data-theme="light"] .ict-quote {
   background: linear-gradient(90deg, rgba(240,180,41,0.1) 0%, transparent 80%);
@@ -755,15 +754,20 @@ canvas { display:block; }
   font-size: 12.5px;
   color: var(--text2);
   line-height: 1.55;
-  flex: 1;
 }
 .ict-quote-attr {
   font-family: var(--mono);
   font-size: 9px;
   color: var(--gold);
-  margin-top: 4px;
+  margin-top: 3px;
   letter-spacing: 1px;
   opacity: 0.75;
+}
+/* Wrap text+attr in a flex column so pill sits cleanly on right */
+.ict-quote-body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
 }
 
 /* ===== STEP PROCESS ===== */
@@ -1083,8 +1087,8 @@ canvas { display:block; }
   </div>
 
   <div class="ict-quote">
-    <div class="ict-quote-text">"The market is not a casino. It is a precision delivery system engineered to move price from one liquidity pool to the next. Your job is not to predict — your job is to read the delivery."</div>
-    <div class="ict-quote-attr">— ICT (Michael J. Huddleston)</div>
+    <div class="ict-quote-body"><div class="ict-quote-text">"The market is not a casino. It is a precision delivery system engineered to move price from one liquidity pool to the next. Your job is not to predict — your job is to read the delivery."</div>
+    <div class="ict-quote-attr">— ICT (Michael J. Huddleston)</div></div>
   </div>
 
   <div style="display:flex;gap:12px;flex-wrap:wrap;margin-bottom:20px;">
@@ -1186,8 +1190,8 @@ canvas { display:block; }
     <div class="section-subtitle">// Where stops live, institutions feed</div>
 
   <div class="ict-quote">
-    <div class="ict-quote-text">"Every rally and every selloff — it's all engineered to find the stops. When you understand that, you stop asking 'why did price do that?' and start asking 'whose stops did it just hunt?'"</div>
-    <div class="ict-quote-attr">— ICT</div>
+    <div class="ict-quote-body"><div class="ict-quote-text">"Every rally and every selloff — it's all engineered to find the stops. When you understand that, you stop asking 'why did price do that?' and start asking 'whose stops did it just hunt?'"</div>
+    <div class="ict-quote-attr">— ICT</div></div>
   </div>
 
   </div>
@@ -1282,8 +1286,8 @@ canvas { display:block; }
     <div class="section-subtitle">// BOS, ChoCH, Premium vs Discount</div>
 
   <div class="ict-quote">
-    <div class="ict-quote-text">"Price only does one of three things: it seeks buy-side liquidity, it seeks sell-side liquidity, or it rebalances a fair value gap. If you know which one it's doing right now — you know everything you need to know."</div>
-    <div class="ict-quote-attr">— ICT</div>
+    <div class="ict-quote-body"><div class="ict-quote-text">"Price only does one of three things: it seeks buy-side liquidity, it seeks sell-side liquidity, or it rebalances a fair value gap. If you know which one it's doing right now — you know everything you need to know."</div>
+    <div class="ict-quote-attr">— ICT</div></div>
   </div>
 
   </div>
@@ -1405,8 +1409,8 @@ canvas { display:block; }
     <div class="section-subtitle">// Where institutional orders were placed</div>
 
   <div class="ict-quote">
-    <div class="ict-quote-text">"An order block is where the bank left their business card. Price will always return to where the institution last did business."</div>
-    <div class="ict-quote-attr">— ICT</div>
+    <div class="ict-quote-body"><div class="ict-quote-text">"An order block is where the bank left their business card. Price will always return to where the institution last did business."</div>
+    <div class="ict-quote-attr">— ICT</div></div>
   </div>
 
   </div>
@@ -1508,8 +1512,8 @@ canvas { display:block; }
     <div class="section-subtitle">// Price inefficiencies that must be filled</div>
 
   <div class="ict-quote">
-    <div class="ict-quote-text">"Fair value gaps are open wounds in the market. The algorithm is programmed to heal them. It will always come back."</div>
-    <div class="ict-quote-attr">— ICT</div>
+    <div class="ict-quote-body"><div class="ict-quote-text">"Fair value gaps are open wounds in the market. The algorithm is programmed to heal them. It will always come back."</div>
+    <div class="ict-quote-attr">— ICT</div></div>
   </div>
 
   </div>
@@ -1575,8 +1579,8 @@ canvas { display:block; }
     <div class="section-subtitle">// Premium & Discount Arrays — ICT's full hierarchy</div>
 
   <div class="ict-quote">
-    <div class="ict-quote-text">"You don't need to predict the market. You need to understand where the algorithm is going to deliver price, and which array it's going to use to get there."</div>
-    <div class="ict-quote-attr">— ICT</div>
+    <div class="ict-quote-body"><div class="ict-quote-text">"You don't need to predict the market. You need to understand where the algorithm is going to deliver price, and which array it's going to use to get there."</div>
+    <div class="ict-quote-attr">— ICT</div></div>
   </div>
 
   </div>
@@ -1661,8 +1665,8 @@ canvas { display:block; }
     <div class="section-subtitle">// Kill Zones + ICT Macros</div>
 
   <div class="ict-quote">
-    <div class="ict-quote-text">"Time is the most important variable in trading. A valid setup outside a kill zone is not a valid setup. It is a trap."</div>
-    <div class="ict-quote-attr">— ICT</div>
+    <div class="ict-quote-body"><div class="ict-quote-text">"Time is the most important variable in trading. A valid setup outside a kill zone is not a valid setup. It is a trap."</div>
+    <div class="ict-quote-attr">— ICT</div></div>
   </div>
 
   </div>
@@ -1842,8 +1846,8 @@ canvas { display:block; }
     <div class="section-subtitle">// Accumulation, Manipulation, Distribution — Fractal across all timeframes</div>
 
   <div class="ict-quote">
-    <div class="ict-quote-text">"Asia accumulates. London manipulates. New York delivers. Never mistake the manipulation for the move — that's how retail traders get destroyed every single day."</div>
-    <div class="ict-quote-attr">— ICT</div>
+    <div class="ict-quote-body"><div class="ict-quote-text">"Asia accumulates. London manipulates. New York delivers. Never mistake the manipulation for the move — that's how retail traders get destroyed every single day."</div>
+    <div class="ict-quote-attr">— ICT</div></div>
   </div>
 
   </div>
@@ -1948,8 +1952,8 @@ canvas { display:block; }
     <div class="section-subtitle">// The institutional playbook — Buy Model & Sell Model</div>
 
   <div class="ict-quote">
-    <div class="ict-quote-text">"Institutions don't chase price. They engineer the conditions that make retail chase price — and then they go the other way."</div>
-    <div class="ict-quote-attr">— ICT</div>
+    <div class="ict-quote-body"><div class="ict-quote-text">"Institutions don't chase price. They engineer the conditions that make retail chase price — and then they go the other way."</div>
+    <div class="ict-quote-attr">— ICT</div></div>
   </div>
 
   </div>
@@ -2023,8 +2027,8 @@ canvas { display:block; }
     <div class="section-subtitle">// Unicorn, Silver Bullet, Turtle Soup, OTE</div>
 
   <div class="ict-quote">
-    <div class="ict-quote-text">"The best trades look the worst right before they work. The Unicorn, the Silver Bullet, the Turtle Soup — they all require you to buy when it looks like it's falling, and sell when it looks like it's rising."</div>
-    <div class="ict-quote-attr">— ICT</div>
+    <div class="ict-quote-body"><div class="ict-quote-text">"The best trades look the worst right before they work. The Unicorn, the Silver Bullet, the Turtle Soup — they all require you to buy when it looks like it's falling, and sell when it looks like it's rising."</div>
+    <div class="ict-quote-attr">— ICT</div></div>
   </div>
 
   </div>
@@ -2122,8 +2126,8 @@ canvas { display:block; }
     <div class="section-subtitle">// Smart Money Tool — Correlated pair divergence signals</div>
 
   <div class="ict-quote">
-    <div class="ict-quote-text">"If they both go up together, that's bullish. But if one goes up and the other doesn't follow — one of them is lying. And the market always tells the truth eventually."</div>
-    <div class="ict-quote-attr">— ICT on SMT Divergence</div>
+    <div class="ict-quote-body"><div class="ict-quote-text">"If they both go up together, that's bullish. But if one goes up and the other doesn't follow — one of them is lying. And the market always tells the truth eventually."</div>
+    <div class="ict-quote-attr">— ICT on SMT Divergence</div></div>
   </div>
 
   </div>
@@ -2198,8 +2202,8 @@ canvas { display:block; }
     <div class="section-subtitle">// Entry, Stop, Target — The mechanics</div>
 
   <div class="ict-quote">
-    <div class="ict-quote-text">"A 3:1 trade that you didn't take is worth absolutely nothing. Execution is the only thing that separates the student from the trader."</div>
-    <div class="ict-quote-attr">— ICT</div>
+    <div class="ict-quote-body"><div class="ict-quote-text">"A 3:1 trade that you didn't take is worth absolutely nothing. Execution is the only thing that separates the student from the trader."</div>
+    <div class="ict-quote-attr">— ICT</div></div>
   </div>
 
   </div>
@@ -2307,8 +2311,8 @@ canvas { display:block; }
     <div class="section-subtitle">// Discipline, Patience, Process</div>
 
   <div class="ict-quote">
-    <div class="ict-quote-text">"The market is not your enemy. You are your enemy. The market is just doing what the algorithm tells it to do. You are the one making emotional decisions."</div>
-    <div class="ict-quote-attr">— ICT</div>
+    <div class="ict-quote-body"><div class="ict-quote-text">"The market is not your enemy. You are your enemy. The market is just doing what the algorithm tells it to do. You are the one making emotional decisions."</div>
+    <div class="ict-quote-attr">— ICT</div></div>
   </div>
 
   </div>
@@ -2384,8 +2388,8 @@ canvas { display:block; }
     <div class="section-subtitle">// SIBI/BISI · PDH/PDL · Standard Deviation · Dealing Range · Trade Management · Wyckoff</div>
 
   <div class="ict-quote">
-    <div class="ict-quote-text">"Retail sees patterns. Smart money sees liquidity pools. That is the single most important distinction you will ever learn in trading."</div>
-    <div class="ict-quote-attr">— ICT</div>
+    <div class="ict-quote-body"><div class="ict-quote-text">"Retail sees patterns. Smart money sees liquidity pools. That is the single most important distinction you will ever learn in trading."</div>
+    <div class="ict-quote-attr">— ICT</div></div>
   </div>
 
   </div>
@@ -2684,8 +2688,8 @@ canvas { display:block; }
     <div class="section-subtitle">// The 8 recurring delivery models — use Sunday night to select</div>
 
   <div class="ict-quote">
-    <div class="ict-quote-text">"Monday's job is to lie. Tuesday's job is to tell the truth. If you understand that one concept, you will stop getting chopped up every Monday for the rest of your trading career."</div>
-    <div class="ict-quote-attr">— ICT</div>
+    <div class="ict-quote-body"><div class="ict-quote-text">"Monday's job is to lie. Tuesday's job is to tell the truth. If you understand that one concept, you will stop getting chopped up every Monday for the rest of your trading career."</div>
+    <div class="ict-quote-attr">— ICT</div></div>
   </div>
 
   </div>
@@ -2817,8 +2821,8 @@ canvas { display:block; }
     <div class="section-subtitle">// 6 intraday delivery models — match to weekly profile bias</div>
 
   <div class="ict-quote">
-    <div class="ict-quote-text">"London opens to manipulate. New York opens to deliver. When you see London doing something that doesn't make sense — it's because New York hasn't told you the punchline yet."</div>
-    <div class="ict-quote-attr">— ICT</div>
+    <div class="ict-quote-body"><div class="ict-quote-text">"London opens to manipulate. New York opens to deliver. When you see London doing something that doesn't make sense — it's because New York hasn't told you the punchline yet."</div>
+    <div class="ict-quote-attr">— ICT</div></div>
   </div>
 
   </div>
@@ -2955,8 +2959,8 @@ canvas { display:block; }
     <div class="section-subtitle">// Weekly profile × Daily profile — the cross-timeframe edge</div>
 
   <div class="ict-quote">
-    <div class="ict-quote-text">"When the weekly bias, the daily profile, and the intraday structure all say the same thing at the same kill zone — that is your highest probability trade. Everything aligned. That's the Unicorn."</div>
-    <div class="ict-quote-attr">— ICT</div>
+    <div class="ict-quote-body"><div class="ict-quote-text">"When the weekly bias, the daily profile, and the intraday structure all say the same thing at the same kill zone — that is your highest probability trade. Everything aligned. That's the Unicorn."</div>
+    <div class="ict-quote-attr">— ICT</div></div>
   </div>
 
   </div>
@@ -3070,8 +3074,8 @@ canvas { display:block; }
     <div class="section-subtitle">// Run in order before every trade. Fail any step = no trade.</div>
 
   <div class="ict-quote">
-    <div class="ict-quote-text">"If you cannot define your edge before you enter the trade, you do not have an edge. You have a hope. And hope is not a trading strategy."</div>
-    <div class="ict-quote-attr">— ICT</div>
+    <div class="ict-quote-body"><div class="ict-quote-text">"If you cannot define your edge before you enter the trade, you do not have an edge. You have a hope. And hope is not a trading strategy."</div>
+    <div class="ict-quote-attr">— ICT</div></div>
   </div>
 
   </div>
@@ -3202,8 +3206,8 @@ canvas { display:block; }
     <div class="section-subtitle">// The most expensive errors retail traders make — and the ICT correction</div>
 
   <div class="ict-quote">
-    <div class="ict-quote-text">"The most expensive education in trading is the one you pay for with your account. Study the chart after every mistake — not to punish yourself, but to learn the algorithm."</div>
-    <div class="ict-quote-attr">— ICT</div>
+    <div class="ict-quote-body"><div class="ict-quote-text">"The most expensive education in trading is the one you pay for with your account. Study the chart after every mistake — not to punish yourself, but to learn the algorithm."</div>
+    <div class="ict-quote-attr">— ICT</div></div>
   </div>
 
   </div>
@@ -3317,8 +3321,8 @@ canvas { display:block; }
     <div class="section-subtitle">// Real-time session tracker — all times in EST (New York)</div>
 
   <div class="ict-quote">
-    <div class="ict-quote-text">"Outside a kill zone, you are not trading the market. You are gambling with the market. The difference is everything."</div>
-    <div class="ict-quote-attr">— ICT</div>
+    <div class="ict-quote-body"><div class="ict-quote-text">"Outside a kill zone, you are not trading the market. You are gambling with the market. The difference is everything."</div>
+    <div class="ict-quote-attr">— ICT</div></div>
   </div>
 
   </div>
@@ -3427,8 +3431,8 @@ canvas { display:block; }
     <div class="section-subtitle">// Answer 6 questions — get your trade signal</div>
 
   <div class="ict-quote">
-    <div class="ict-quote-text">"Before you put on a single trade, you need to know: where is the liquidity, what is the time, and what is the higher timeframe bias. Without all three — sit on your hands."</div>
-    <div class="ict-quote-attr">— ICT</div>
+    <div class="ict-quote-body"><div class="ict-quote-text">"Before you put on a single trade, you need to know: where is the liquidity, what is the time, and what is the higher timeframe bias. Without all three — sit on your hands."</div>
+    <div class="ict-quote-attr">— ICT</div></div>
   </div>
 
   </div>
@@ -3512,8 +3516,8 @@ canvas { display:block; }
     <div class="section-subtitle">// Risk/Reward · Position Size · Profit & Loss</div>
 
   <div class="ict-quote">
-    <div class="ict-quote-text">"Never risk more than you are willing to lose completely. Your stop loss is not a suggestion. It is a contract you make with yourself before you enter."</div>
-    <div class="ict-quote-attr">— ICT</div>
+    <div class="ict-quote-body"><div class="ict-quote-text">"Never risk more than you are willing to lose completely. Your stop loss is not a suggestion. It is a contract you make with yourself before you enter."</div>
+    <div class="ict-quote-attr">— ICT</div></div>
   </div>
 
   </div>
@@ -3596,8 +3600,8 @@ canvas { display:block; }
     <div class="section-subtitle">// OTE · Premium/Discount · Standard Deviations · Fibonacci</div>
 
   <div class="ict-quote">
-    <div class="ict-quote-text">"The OTE is where the algorithm goes to reload. 61.8 to 79 percent. That's where smart money enters after displacement. Learn to draw it correctly and you will never struggle for entries again."</div>
-    <div class="ict-quote-attr">— ICT on OTE Fibonacci</div>
+    <div class="ict-quote-body"><div class="ict-quote-text">"The OTE is where the algorithm goes to reload. 61.8 to 79 percent. That's where smart money enters after displacement. Learn to draw it correctly and you will never struggle for entries again."</div>
+    <div class="ict-quote-attr">— ICT on OTE Fibonacci</div></div>
   </div>
 
   </div>
@@ -3642,8 +3646,8 @@ canvas { display:block; }
     <div class="section-subtitle">// 24-hour live timeline · All sessions · Current position</div>
 
   <div class="ict-quote">
-    <div class="ict-quote-text">"The Tokyo session is the setup. The London session is the manipulation. The New York session is the delivery. Three acts. Every single day."</div>
-    <div class="ict-quote-attr">— ICT</div>
+    <div class="ict-quote-body"><div class="ict-quote-text">"The Tokyo session is the setup. The London session is the manipulation. The New York session is the delivery. Three acts. Every single day."</div>
+    <div class="ict-quote-attr">— ICT</div></div>
   </div>
 
   </div>
@@ -3668,8 +3672,8 @@ canvas { display:block; }
     <div class="section-subtitle">// Tap to flip · Know it / Still learning · Track your progress</div>
 
   <div class="ict-quote">
-    <div class="ict-quote-text">"You have to know the language before you can read the story. Learn every term, understand every concept — until it becomes reflexive, not analytical."</div>
-    <div class="ict-quote-attr">— ICT</div>
+    <div class="ict-quote-body"><div class="ict-quote-text">"You have to know the language before you can read the story. Learn every term, understand every concept — until it becomes reflexive, not analytical."</div>
+    <div class="ict-quote-attr">— ICT</div></div>
   </div>
 
   </div>
@@ -3716,8 +3720,8 @@ canvas { display:block; }
     <div class="section-subtitle">// Log trades · Track performance · Export CSV</div>
 
   <div class="ict-quote">
-    <div class="ict-quote-text">"If you are not journaling your trades, you are not a trader — you are a gambler with a brokerage account. The journal is where the real learning happens."</div>
-    <div class="ict-quote-attr">— ICT</div>
+    <div class="ict-quote-body"><div class="ict-quote-text">"If you are not journaling your trades, you are not a trader — you are a gambler with a brokerage account. The journal is where the real learning happens."</div>
+    <div class="ict-quote-attr">— ICT</div></div>
   </div>
 
   </div>
@@ -3807,8 +3811,8 @@ canvas { display:block; }
     <div class="section-subtitle">// Searchable A–Z reference · Every ICT term defined</div>
 
   <div class="ict-quote">
-    <div class="ict-quote-text">"The reason most retail traders lose is not that the concepts are hard — it is that they never took the time to truly understand the vocabulary. Words mean specific things in this methodology."</div>
-    <div class="ict-quote-attr">— ICT</div>
+    <div class="ict-quote-body"><div class="ict-quote-text">"The reason most retail traders lose is not that the concepts are hard — it is that they never took the time to truly understand the vocabulary. Words mean specific things in this methodology."</div>
+    <div class="ict-quote-attr">— ICT</div></div>
   </div>
 
   </div>
@@ -3826,8 +3830,8 @@ canvas { display:block; }
     <div class="section-subtitle">// Sunday setup · Profile selector · Daily bias tracker</div>
 
   <div class="ict-quote">
-    <div class="ict-quote-text">"Every Sunday night, smart traders are already two or three moves ahead. They know the bias, they know the liquidity, they know which profile is most likely. They are not reacting on Monday — they are executing a plan."</div>
-    <div class="ict-quote-attr">— ICT</div>
+    <div class="ict-quote-body"><div class="ict-quote-text">"Every Sunday night, smart traders are already two or three moves ahead. They know the bias, they know the liquidity, they know which profile is most likely. They are not reacting on Monday — they are executing a plan."</div>
+    <div class="ict-quote-attr">— ICT</div></div>
   </div>
 
   </div>
@@ -3891,8 +3895,8 @@ canvas { display:block; }
   </div>
 
   <div class="ict-quote">
-    <div class="ict-quote-text">"The more confluence you have, the less you have to predict. You are not guessing — you are reading a checklist that the algorithm has already filled out for you."</div>
-    <div class="ict-quote-attr">— ICT</div>
+    <div class="ict-quote-body"><div class="ict-quote-text">"The more confluence you have, the less you have to predict. You are not guessing — you are reading a checklist that the algorithm has already filled out for you."</div>
+    <div class="ict-quote-attr">— ICT</div></div>
   </div>
 
   <div class="grid-2" style="margin-bottom:20px;">
@@ -4513,23 +4517,22 @@ function injectResourceLinks() {
     btn.target = '_blank';
     btn.rel = 'noopener noreferrer';
     btn.title = 'Watch ICT (@InnerCircleTrader) explain this on YouTube';
-    btn.innerHTML = '▶ ICT';
+    btn.innerHTML = '▶ Watch on ICT\'s Channel';
     btn.style.cssText = [
       'display:inline-flex',
       'align-items:center',
-      'gap:4px',
+      'gap:5px',
       'font-family:var(--mono)',
       'font-size:9px',
-      'letter-spacing:0.5px',
+      'letter-spacing:0.3px',
       'color:var(--text3)',
       'border:1px solid var(--border)',
-      'padding:3px 9px',
-      'border-radius:20px',
+      'padding:4px 10px',
+      'border-radius:4px',
       'text-decoration:none',
       'transition:all var(--transition)',
       'white-space:nowrap',
       'flex-shrink:0',
-      'text-transform:uppercase',
     ].join(';');
     btn.addEventListener('mouseenter', () => {
       btn.style.borderColor = '#ff0000';
