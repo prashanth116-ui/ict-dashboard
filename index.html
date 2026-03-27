@@ -11,6 +11,20 @@
 <meta name="apple-mobile-web-app-title" content="ICT Mastery">
 <link rel="manifest" href="/manifest.json">
 <link rel="apple-touch-icon" href="/icon-192.png">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><polygon points='50,5 95,27.5 95,72.5 50,95 5,72.5 5,27.5' fill='%23f0b429'/><polygon points='50,22 80,38 80,62 50,78 20,62 20,38' fill='%2307090d'/><rect x='46' y='34' width='8' height='32' fill='%23f0b429'/></svg>">
+<link rel="icon" type="image/png" href="/icon-192.png" sizes="192x192">
+<!-- Open Graph / Social Sharing -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://ict-mastery.vercel.app/">
+<link rel="canonical" href="https://ict-mastery.vercel.app/">
+<meta property="og:title" content="ICT Mastery Dashboard — Complete Smart Money Reference">
+<meta property="og:description" content="29-tab ICT/SMC trading reference with live kill zone timer, bias builder, confluence scorer, trade journal, flashcards and more. Free, offline-capable.">
+<meta property="og:image" content="https://ict-mastery.vercel.app/icon-512.png">
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="ICT Mastery Dashboard">
+<meta name="twitter:description" content="Complete ICT/Smart Money Concepts reference — kill zones, order blocks, FVG, confluence scoring and more.">
+<meta name="twitter:image" content="https://ict-mastery.vercel.app/icon-512.png">
 <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet">
 <style>
 :root {
@@ -961,6 +975,107 @@ canvas { display:block; }
 .j-action-btn:hover { border-color: var(--gold); color: var(--gold); }
 .j-action-btn.green { border-color: rgba(0,200,150,0.3); color: var(--green); }
 .j-action-btn.green:hover { background: rgba(0,200,150,0.08); }
+
+
+/* ── PRINT / PDF MODE ── */
+@media print {
+  header, .nav-tabs, .price-ticker, .global-search-wrap,
+  .mob-nav-btn, .theme-toggle, .header-tag,
+  .yt-link, #conf-share-btn, .j-import-export,
+  .j-analytics { display: none !important; }
+
+  body { background: #fff !important; color: #000 !important; font-size: 11pt; }
+  .section { display: block !important; }
+  .section:not(.active) { display: none !important; }
+  .main { padding: 0 !important; }
+  .card {
+    border: 1px solid #ccc !important;
+    box-shadow: none !important;
+    break-inside: avoid;
+    page-break-inside: avoid;
+    background: #fff !important;
+  }
+  .card::before { display: none !important; }
+  .section-title { font-size: 18pt; color: #000 !important; }
+  .section-title span { color: #c8860a !important; }
+  .card-title { color: #000 !important; }
+  .card-body, .card-label { color: #333 !important; }
+  .chip, .pill { border: 1px solid #999 !important; color: #333 !important; background: #f5f5f5 !important; }
+  .rule-box { border: 1px solid #c8860a !important; background: #fffbf0 !important; color: #333 !important; }
+  .ict-quote { border-left: 3px solid #c8860a !important; background: #fffbf0 !important; }
+  .ict-quote-text, .ict-quote-attr { color: #333 !important; }
+  .grid-2, .grid-3 { grid-template-columns: 1fr 1fr !important; gap: 12pt !important; }
+  canvas { max-width: 100%; }
+  a { color: #c8860a; text-decoration: none; }
+  .kill-zone-item { background: #f9f9f9 !important; border: 1px solid #ddd !important; }
+  .section-header { border-bottom: 2px solid #c8860a !important; margin-bottom: 12pt !important; }
+  @page { margin: 1.5cm; size: A4; }
+}
+
+
+/* ── MOBILE BOTTOM QUICK NAV ── */
+.mob-bottom-nav {
+  display: none;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: var(--bg2);
+  border-top: 1px solid var(--border);
+  z-index: 200;
+  padding: 6px 0 max(6px, env(safe-area-inset-bottom));
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+}
+.mob-bottom-nav-items {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+.mob-nav-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  padding: 4px 8px;
+  cursor: pointer;
+  border: none;
+  background: none;
+  color: var(--text3);
+  font-family: var(--mono);
+  font-size: 8px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  transition: color var(--transition);
+  -webkit-tap-highlight-color: transparent;
+}
+.mob-nav-item .mob-nav-icon { font-size: 20px; line-height: 1; }
+.mob-nav-item.active, .mob-nav-item:active { color: var(--gold); }
+
+@media(max-width:700px) {
+  .mob-bottom-nav { display: block; }
+  .main { padding-bottom: 80px !important; }
+}
+
+.print-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-family: var(--mono);
+  font-size: 9px;
+  color: var(--text3);
+  border: 1px solid var(--border);
+  padding: 4px 10px;
+  border-radius: 4px;
+  background: none;
+  cursor: pointer;
+  transition: all var(--transition);
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+  margin-top: 8px;
+}
+.print-btn:hover { border-color: var(--gold); color: var(--gold); }
+@media print { .print-btn { display: none !important; } }
 
 </style>
 </head>
@@ -3730,7 +3845,7 @@ canvas { display:block; }
     <button class="j-action-btn" onclick="jExportCSV()">⬇ CSV</button>
     <button class="j-action-btn" onclick="jExportJSON()">⬇ JSON</button>
     <button class="j-action-btn green" onclick="jImportJSON()">⬆ Import</button>
-    <input type="file" id="j-import-input" accept=".json" style="display:none" onchange="jHandleImport(this)">
+    <input type="file" id="j-import-input" accept=".json,.csv,.txt" style="display:none" onchange="jHandleImport(this)">
     <button class="j-action-btn" onclick="jClearAll()" style="color:var(--red);border-color:rgba(240,79,94,0.3)">✕ Clear</button>
   </div>
   <div class="j-analytics">
@@ -4095,12 +4210,30 @@ function setTick(id, price, chgPct, isUp) {
   const fmt = n => (+n).toLocaleString('en-US', {minimumFractionDigits:2, maximumFractionDigits:2});
   const priceEl = document.getElementById('tick-' + id);
   const chgEl   = document.getElementById('tick-' + id + '-chg');
-  if (priceEl) priceEl.textContent = fmt(price);
+  if (priceEl) {
+    priceEl.textContent = fmt(price);
+    priceEl.title = 'Last updated: ' + new Date().toLocaleTimeString();
+  }
   if (chgEl) {
     chgEl.textContent = (isUp ? '+' : '') + (+chgPct).toFixed(2) + '%';
     chgEl.className = 'ticker-change ' + (isUp ? 'up' : 'down');
   }
+  // Cache in session storage for fallback
+  try { sessionStorage.setItem('tick_' + id, JSON.stringify({price, chgPct, isUp, t: Date.now()})); } catch(e) {}
 }
+
+function loadCachedTicks() {
+  // Show cached prices while fresh data loads
+  ['ES','NQ','GC','CL','DXY'].forEach(id => {
+    try {
+      const cached = JSON.parse(sessionStorage.getItem('tick_' + id) || 'null');
+      if (cached && Date.now() - cached.t < 3600000) { // < 1 hour old
+        setTick(id, cached.price, cached.chgPct, cached.isUp);
+      }
+    } catch(e) {}
+  });
+}
+loadCachedTicks();
 
 async function fetchTickerViaProxy(sym) {
   // allorigins.win is a free open CORS proxy — wraps any URL
@@ -4284,15 +4417,17 @@ function confShare() {
   }
 }
 
-// Handle ?tab= shortcut URL (from PWA shortcuts)
+// Handle ?tab= URL on page load — restores bookmarked/shared tabs
 (function() {
   const params = new URLSearchParams(location.search);
   const tabParam = params.get('tab');
   if (tabParam) {
     setTimeout(() => {
-      const btn = document.querySelector('button[onclick*="' + tabParam + '"]');
+      const btn = document.querySelector('.tab-btn[onclick*="' + tabParam + '"]');
       showTab(tabParam, btn);
-    }, 300);
+      // Scroll tab button into view
+      if (btn) btn.scrollIntoView({ block: 'nearest', inline: 'center' });
+    }, 350);
   }
 })();
 
@@ -4336,17 +4471,51 @@ function jHandleImport(input) {
   if (!file) return;
   const reader = new FileReader();
   reader.onload = e => {
+    const text = e.target.result.trim();
     try {
-      const imported = JSON.parse(e.target.result);
+      // Try JSON first (our own export format)
+      const imported = JSON.parse(text);
       if (Array.isArray(imported)) {
         jTrades = [...imported, ...jTrades];
         try { localStorage.setItem('ict-journal', JSON.stringify(jTrades)); } catch(e) {}
-        jUpdateStats();
-        jRenderLog();
-        drawJournalCharts();
-        alert(`✓ Imported ${imported.length} trades`);
+        jUpdateStats(); jRenderLog(); drawJournalCharts();
+        alert('✓ Imported ' + imported.length + ' trades (JSON)');
+        return;
       }
-    } catch(e) { alert('Invalid JSON file'); }
+    } catch(e) {}
+    // Try CSV (Tradovate, TOS, generic broker formats)
+    try {
+      const lines = text.split('\n').filter(l => l.trim());
+      const headers = lines[0].toLowerCase().split(',').map(h => h.trim().replace(/"/g,''));
+      const imported = [];
+      for (let i = 1; i < lines.length; i++) {
+        const cols = lines[i].split(',').map(c => c.trim().replace(/"/g,''));
+        if (cols.length < 3) continue;
+        const row = {};
+        headers.forEach((h, idx) => row[h] = cols[idx] || '');
+        // Map common broker column names to our schema
+        const trade = {
+          date: row.date || row['trade date'] || row['entry date'] || row['time'] || new Date().toISOString().split('T')[0],
+          instrument: row.symbol || row.instrument || row['contract'] || row['ticker'] || 'Unknown',
+          session: 'NY AM',
+          direction: (row.side || row.direction || row.action || row.type || 'Long').includes('S') ? 'Short' : 'Long',
+          setup: row.setup || row.strategy || row.notes || 'Imported',
+          result: '',
+          rr: parseFloat(row.rr || row['r:r'] || row['risk/reward'] || 0).toFixed(1),
+          pnl: parseFloat(row.pnl || row['p&l'] || row['profit/loss'] || row['net'] || row['realized pnl'] || 0),
+          notes: row.notes || row.comment || row.description || '',
+        };
+        trade.result = trade.pnl > 0 ? 'Win' : trade.pnl < 0 ? 'Loss' : 'BE';
+        imported.push(trade);
+      }
+      if (imported.length === 0) throw new Error('No valid rows found');
+      jTrades = [...imported, ...jTrades];
+      try { localStorage.setItem('ict-journal', JSON.stringify(jTrades)); } catch(e) {}
+      jUpdateStats(); jRenderLog(); drawJournalCharts();
+      alert('✓ Imported ' + imported.length + ' trades from CSV (Tradovate/TOS/generic)');
+    } catch(e) {
+      alert('Could not parse file. Supported: JSON (ICT Journal export) or CSV (Tradovate, TOS, generic broker).');
+    }
   };
   reader.readAsText(file);
   input.value = '';
@@ -4549,6 +4718,26 @@ function injectResourceLinks() {
 }
 setTimeout(injectResourceLinks, 400);
 
+// Print buttons on key reference tabs
+(function injectPrintBtns() {
+  const printTabs = ['checklist','time','setups','execution','alignment'];
+  printTabs.forEach(id => {
+    const sec = document.getElementById('sec-' + id);
+    if (!sec) return;
+    const header = sec.querySelector('.section-header');
+    if (!header || header.querySelector('.print-btn')) return;
+    const btn = document.createElement('button');
+    btn.className = 'print-btn';
+    btn.innerHTML = '🖨 Print Reference';
+    btn.onclick = () => {
+      // Activate this section then print
+      showTab(id, null);
+      setTimeout(() => window.print(), 100);
+    };
+    header.appendChild(btn);
+  });
+})();
+
 // ── THEME TOGGLE ──────────────────────────────────────────────────────
 function toggleTheme() {
   const html = document.documentElement;
@@ -4604,6 +4793,19 @@ function showTab(id, btn) {
     // Special handlers
     if (id === 'sessionmap') setTimeout(drawSessionMap, 100);
     if (id === 'confluence') setTimeout(confInit, 100);
+    if (id === 'journal') { setTimeout(() => { jUpdateStats(); jRenderLog(); drawJournalCharts(); }, 100); }
+    // FIX 2: URL sync — every tab is bookmarkable & shareable
+    try {
+      const url = id === 'overview' ? location.pathname : location.pathname + '?tab=' + id;
+      history.replaceState(null, '', url);
+    } catch(e2) {}
+    // Close mobile nav if open
+    const nav = document.getElementById('navTabs');
+    if (nav && nav.classList.contains('mob-open')) {
+      nav.classList.remove('mob-open');
+      const mb = document.getElementById('mob-nav-btn');
+      if (mb) mb.textContent = '☰ MENU';
+    }
   } catch(e) {
     console.error('showTab error:', e);
   }
@@ -6504,5 +6706,29 @@ setTimeout(confInit, 500);
 
 
 
+
+<!-- Mobile Bottom Quick Nav -->
+<div class="mob-bottom-nav" id="mobBottomNav">
+  <div class="mob-bottom-nav-items">
+    <button class="mob-nav-item" onclick="showTab('killzonetimer',this)" title="Kill Zone Timer">
+      <span class="mob-nav-icon">⏱</span>Timer
+    </button>
+    <button class="mob-nav-item" onclick="showTab('biasbuilder',this)" title="Bias Builder">
+      <span class="mob-nav-icon">⚡</span>Bias
+    </button>
+    <button class="mob-nav-item" onclick="showTab('confluence',this)" title="Confluence">
+      <span class="mob-nav-icon">🎯</span>Score
+    </button>
+    <button class="mob-nav-item" onclick="showTab('flashcards',this)" title="Flashcards">
+      <span class="mob-nav-icon">🃏</span>Cards
+    </button>
+    <button class="mob-nav-item" onclick="showTab('journal',this)" title="Journal">
+      <span class="mob-nav-icon">📓</span>Journal
+    </button>
+  </div>
+</div>
+
+<!-- Vercel Analytics -->
+<script defer src="/_vercel/insights/script.js"></script>
 </body>
 </html>
