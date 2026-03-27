@@ -11,8 +11,9 @@
 <meta name="apple-mobile-web-app-title" content="ICT Mastery">
 <link rel="manifest" href="/manifest.json">
 <link rel="apple-touch-icon" href="/icon-192.png">
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><polygon points='50,5 95,27.5 95,72.5 50,95 5,72.5 5,27.5' fill='%23f0b429'/><polygon points='50,22 80,38 80,62 50,78 20,62 20,38' fill='%2307090d'/><rect x='46' y='34' width='8' height='32' fill='%23f0b429'/></svg>">
+<link rel="icon" type="image/svg+xml" href="/icon.svg">
 <link rel="icon" type="image/png" href="/icon-192.png" sizes="192x192">
+<link rel="shortcut icon" href="/icon.svg">
 <!-- Open Graph / Social Sharing -->
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://ict-mastery.vercel.app/">
@@ -20,6 +21,13 @@
 <meta property="og:title" content="ICT Mastery Dashboard — Complete Smart Money Reference">
 <meta property="og:description" content="29-tab ICT/SMC trading reference with live kill zone timer, bias builder, confluence scorer, trade journal, flashcards and more. Free, offline-capable.">
 <meta property="og:image" content="https://ict-mastery.vercel.app/icon-512.png">
+<meta property="og:image:width" content="512">
+<meta property="og:image:height" content="512">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ICT Mastery Dashboard">
+<meta name="twitter:title" content="ICT Mastery Dashboard — Complete SMC Reference">
+<meta name="twitter:description" content="29-tab ICT/Smart Money Concepts reference with live kill zone timer, bias builder, confluence scorer, flashcards & trade journal. Free, offline-capable PWA.">
+<meta name="twitter:image" content="https://ict-mastery.vercel.app/icon-512.png">
 <!-- Twitter Card -->
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="ICT Mastery Dashboard">
@@ -3844,7 +3852,7 @@ canvas { display:block; }
   <div class="j-import-export">
     <button class="j-action-btn" onclick="jExportCSV()">⬇ CSV</button>
     <button class="j-action-btn" onclick="jExportJSON()">⬇ JSON</button>
-    <button class="j-action-btn green" onclick="jImportJSON()">⬆ Import</button>
+    <button class="j-action-btn green" onclick="jImportJSON()" title="Import JSON export or broker CSV (Tradovate, TOS)">⬆ Import JSON/CSV</button>
     <input type="file" id="j-import-input" accept=".json,.csv,.txt" style="display:none" onchange="jHandleImport(this)">
     <button class="j-action-btn" onclick="jClearAll()" style="color:var(--red);border-color:rgba(240,79,94,0.3)">✕ Clear</button>
   </div>
@@ -4179,6 +4187,14 @@ if ('serviceWorker' in navigator) {
   });
 }
 
+// Handle browser back/forward buttons restoring tab state
+window.addEventListener('popstate', function() {
+  const params = new URLSearchParams(location.search);
+  const tab = params.get('tab') || 'overview';
+  const btn = document.querySelector('button[onclick*="' + tab + '"]');
+  showTab(tab, btn);
+});
+
 // ══════════════════════════════════════════════════════════════════════
 // FEATURE #2: MOBILE NAV HAMBURGER
 // ══════════════════════════════════════════════════════════════════════
@@ -4235,32 +4251,15 @@ function loadCachedTicks() {
 }
 loadCachedTicks();
 
-async function fetchTickerViaProxy(sym) {
-  // allorigins.win is a free open CORS proxy — wraps any URL
-  const target = encodeURIComponent(
-    `https://query1.finance.yahoo.com/v8/finance/chart/${sym.yahoo}?interval=1m&range=1d`
-  );
-  const r = await fetch(`https://api.allorigins.win/get?url=${target}`);
-  const wrapper = await r.json();
-  const d = JSON.parse(wrapper.contents);
-  const meta = d?.chart?.result?.[0]?.meta;
-  if (!meta) throw new Error('no meta');
-  const price = meta.regularMarketPrice;
-  const prev  = meta.previousClose || meta.chartPreviousClose || price;
-  const chg   = price - prev;
-  const pct   = prev ? (chg / prev) * 100 : 0;
-  return { price, pct, isUp: chg >= 0 };
-}
-
-async function fetchTickerViaYtdl(sym) {
-  // Alternate free proxy: corsproxy.io
-  const target = encodeURIComponent(
-    `https://query2.finance.yahoo.com/v8/finance/chart/${sym.yahoo}?interval=1m&range=1d`
-  );
-  const r = await fetch(`https://corsproxy.io/?` + target);
-  const d = await r.json();
-  const meta = d?.chart?.result?.[0]?.meta;
-  if (!meta) throw new Error('no meta');
+// Multiple proxy sources with race — fastest wins
+async function fetchYahoo(yahoo, proxy) {
+  const base = proxy === 1
+    ? `https://api.allorigins.win/get?url=${encodeURIComponent(`https://query1.finance.yahoo.com/v8/finance/chart/${yahoo}?interval=1m&range=1d`)}`
+    : `https://corsproxy.io/?${encodeURIComponent(`https://query2.finance.yahoo.com/v8/finance/chart/${yahoo}?interval=1m&range=1d`)}`;
+  const r = await fetch(base, { signal: AbortSignal.timeout(5000) });
+  const raw = proxy === 1 ? JSON.parse((await r.json()).contents) : await r.json();
+  const meta = raw?.chart?.result?.[0]?.meta;
+  if (!meta || !meta.regularMarketPrice) throw new Error('no data');
   const price = meta.regularMarketPrice;
   const prev  = meta.previousClose || meta.chartPreviousClose || price;
   const chg   = price - prev;
@@ -4271,24 +4270,20 @@ async function fetchTickerViaYtdl(sym) {
 async function fetchTicker() {
   for (const sym of TICKER_CFG) {
     try {
-      // Try primary proxy first
-      const data = await fetchTickerViaProxy(sym);
+      // Race both proxies — whichever responds first wins
+      const data = await Promise.any([
+        fetchYahoo(sym.yahoo, 1),
+        fetchYahoo(sym.yahoo, 2),
+      ]);
       setTick(sym.id, data.price, data.pct, data.isUp);
       tickerPrices[sym.id] = data;
-    } catch(e1) {
-      try {
-        // Fallback to secondary proxy
-        const data = await fetchTickerViaYtdl(sym);
-        setTick(sym.id, data.price, data.pct, data.isUp);
-        tickerPrices[sym.id] = data;
-      } catch(e2) {
-        // Both failed — leave as dashes, try again on next interval
-      }
+    } catch(e) {
+      // Both proxies failed — leave as dashes
     }
   }
 }
 
-setTimeout(fetchTicker, 600);
+setTimeout(fetchTicker, 800);
 setInterval(fetchTicker, 30000);
 
 // ══════════════════════════════════════════════════════════════════════
@@ -4720,7 +4715,7 @@ setTimeout(injectResourceLinks, 400);
 
 // Print buttons on key reference tabs
 (function injectPrintBtns() {
-  const printTabs = ['checklist','time','setups','execution','alignment'];
+  const printTabs = ['checklist','time','setups','execution','alignment','confluence','biasbuilder','weeklyplanner','structure','liquidity'];
   printTabs.forEach(id => {
     const sec = document.getElementById('sec-' + id);
     if (!sec) return;
